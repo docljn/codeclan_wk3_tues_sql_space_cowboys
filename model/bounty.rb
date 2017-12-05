@@ -57,9 +57,14 @@ def delete()
       db.close()
   end
 
-# \\TODO delete
-#
-# \\TODO delete_all
+  def self.delete_all()
+        db = PG.connect({ dbname: 'space_cowboys', host: 'localhost'})
+        sql = "DELETE FROM bounties;"
+        db.prepare("delete_all", sql)
+        db.exec_prepared("delete_all")
+        db.close()
+    end
+
 #
 # \\TODO find
 
