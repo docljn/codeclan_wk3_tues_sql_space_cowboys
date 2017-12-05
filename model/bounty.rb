@@ -102,18 +102,32 @@ class Bounty
   end
 
   def self.find_by(column_name, value)
+    # can't do this yet.
+    # can't feed in id as a non-string as ruby goes nuts
+    # can't feed in 'id' as then my sql string doesn't work
+    # can't concatenate as $1 isn't a string at the point that I'm writing the SQL, but if I don't use $1 then I'm not sanitising my data.
+
     db = PG.connect({dbname: 'space_cowboys', host: 'localhost'})
-    sql = "SELECT * FROM bounties WHERE #{column_name} = #{value} "
+    # sql = "SELECT * FROM bounties WHERE #{column_name} = #{value} "
     sql = "SELECT * FROM bounties WHERE $1 = $2"
-    values =
-    # values = [value.to_i]
+
+    values = [column_name, value]
     db.prepare("find", sql)
-    bounties = db.exec_prepared("find")
+    bounties = db.exec_prepared("find", values)
+    object = bounties.map {|bounty| Bounty.new(bounty)}
+    return object
+  end
+
+  def self.find_by_id(value)
+    db = PG.connect({dbname: 'space_cowboys', host: 'localhost'})
+    sql = "SELECT * FROM bounties WHERE id = $1"
+
+    values = [value]
+    db.prepare("find", sql)
+    bounties = db.exec_prepared("find", values)
     object = bounties.map {|bounty| Bounty.new(bounty)}
     binding.pry
     return object
-
-
   end
 
 
