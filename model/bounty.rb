@@ -108,7 +108,7 @@ class Bounty
     # can't concatenate as $1 isn't a string at the point that I'm writing the SQL, but if I don't use $1 then I'm not sanitising my data.
 
     db = PG.connect({dbname: 'space_cowboys', host: 'localhost'})
-    # sql = "SELECT * FROM bounties WHERE #{column_name} = #{value} "
+    # sql = "SELECT * FROM bounties WHERE #{column_name} = #{value} "  -- this works just fine, but no santising
     sql = "SELECT * FROM bounties WHERE $1 = $2"
 
     values = [column_name, value]
