@@ -12,8 +12,6 @@ class Bounty
     @collected_by = options['collected_by']
   end
 
-#save
-
 def save()
   db = PG.connect({ dbname: 'space_cowboys', host: 'localhost'})
   sql = "
@@ -50,6 +48,19 @@ def update()
   db.close
 end
 
-#delete
+def delete()
+      db = PG.connect({ dbname: 'space_cowboys', host: 'localhost'})
+      sql = "DELETE FROM bounties WHERE id = $1;"
+      values = [@id]
+      db.prepare("delete_one", sql)
+      db.exec_prepared("delete_one", values)
+      db.close()
+  end
+
+# \\TODO delete
+#
+# \\TODO delete_all
+#
+# \\TODO find
 
 end
