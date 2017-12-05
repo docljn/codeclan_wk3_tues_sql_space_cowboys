@@ -65,7 +65,14 @@ def delete()
         db.close()
     end
 
-#
-# \\TODO find
+  def find_by_id()
+    db = PG.connect({ dbname: 'space_cowboys', host: 'localhost'})
+    sql = "SELECT * FROM bounties WHERE id = $1;"
+    values = [@id]
+    db.prepare("find_by_id", sql)
+    bounty = db.exec_prepared("find_by_id", values)
+    db.close()
+    return bounty.map{|bounty| Bounty.new(bounty)}
+  end
 
 end

@@ -1,7 +1,7 @@
 require ("pry-byebug")
 require_relative("./model/bounty.rb")
 
-
+Bounty.delete_all()
 
 bounty1 = Bounty.new({
   'name' => 'Red',
@@ -18,13 +18,13 @@ bounty2 = Bounty.new({
   })
 
   bounty1.save()
-  # bounty2.save()
+  bounty2.save()
 
   # bounty1.name='Blue'
   # bounty1.update()
 
   # bounty1.delete()
+  found = bounty1.find_by_id()
 
-  Bounty.delete_all()
   binding.pry
   nil
