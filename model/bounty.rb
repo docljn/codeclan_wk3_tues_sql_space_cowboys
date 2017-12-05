@@ -32,7 +32,23 @@ def save()
   db.close
 end
 
-#update
+def update()
+  db = PG.connect({ dbname: 'space_cowboys', host: 'localhost'})
+  sql = "
+      UPDATE bounties SET (
+          name,
+          bounty_value,
+          favourite_weapon,
+          collected_by
+        ) = (
+          $1, $2, $3, $4
+        ) WHERE id = $5
+          ;"
+  values = [@name, @bounty_value, @favourite_weapon, @collected_by, @id]
+  db.prepare("update", sql)
+  db.exec_prepared("update", values)
+  db.close
+end
 
 #delete
 
