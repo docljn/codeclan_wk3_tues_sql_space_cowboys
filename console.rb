@@ -1,3 +1,4 @@
+# console.rb
 require ("pry-byebug")
 require_relative("./model/bounty.rb")
 
@@ -17,14 +18,23 @@ bounty2 = Bounty.new({
   'collected_by' => 'Princess Leia'
   })
 
-  bounty1.save()
-  bounty2.save()
+bounty3 = Bounty.new({
+  'name' => 'Gold',
+  'bounty_value' => '100',
+  'favourite_weapon' => 'Xenon Whip'
+  })
 
-  # bounty1.name='Blue'
-  # bounty1.update()
+bounty1.save()
+bounty2.save()
+bounty3.save()
 
-  # bounty1.delete()
-  found = bounty1.find_by_id()
+bounty1.name='Blue'
+bounty1.update()
 
-  binding.pry
-  nil
+bounty1.delete()
+# found = bounty1.find_by_id()
+
+binding.pry
+nil
+
+# console.rb

@@ -1,3 +1,5 @@
+-- bounties.sql
+
 DROP TABLE IF EXISTS bounties;
 
 CREATE TABLE bounties (
@@ -7,3 +9,5 @@ CREATE TABLE bounties (
   favourite_weapon VARCHAR(255),
   collected_by VARCHAR(255)
 );
+
+-- bounties.sql

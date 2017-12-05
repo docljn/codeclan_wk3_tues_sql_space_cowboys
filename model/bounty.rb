@@ -1,3 +1,4 @@
+# bounty.rb
 require('pg')
 
 class Bounty
@@ -48,9 +49,43 @@ class Bounty
     db.close
   end
 
+  # Graeme did these on his own.
+
+  # def delete()
+  #   db = PG.connect({ dbname: 'space_cowboys', host: 'localhost'})
+  #   sql = "DELETE FROM bounties WHERE id = $1;"
+  #   values = [@id]
+  #   db.prepare("delete_one", sql)
+  #   db.exec_prepared("delete_one", values)
+  #   db.close()
+  # end
+  #
+  # def self.delete_all()
+  #   db = PG.connect({ dbname: 'space_cowboys', host: 'localhost'})
+  #   sql = "DELETE FROM bounties;"
+  #   db.prepare("delete_all", sql)
+  #   db.exec_prepared("delete_all")
+  #   db.close()
+  # end
+
+  # def find_by_id()
+  #   db = PG.connect({ dbname: 'space_cowboys', host: 'localhost'})
+  #   sql = "SELECT * FROM bounties WHERE id = $1;"
+  #   values = [@id]
+  #   db.prepare("find_by_id", sql)
+  #   bounty = db.exec_prepared("find_by_id", values)
+  #   db.close()
+  #   return bounty.map{|bounty| Bounty.new(bounty)}
+  # end
+
+  # Implement a `find` method that returns **one** instance of your class (do you have to use a map method? Hmm.)
+  # Solo work:
+  # Under what circumstances would you be searching for something in a database by id?
+  # Would it be less or more efficient to retrieve a selection of records and then iterate through them?
+
   def delete()
-    db = PG.connect({ dbname: 'space_cowboys', host: 'localhost'})
-    sql = "DELETE FROM bounties WHERE id = $1;"
+    db = PG.connect({dbname: 'space_cowboys', host: 'localhost'})
+    sql = "DELETE FROM bounties where id = $1"
     values = [@id]
     db.prepare("delete_one", sql)
     db.exec_prepared("delete_one", values)
@@ -58,21 +93,13 @@ class Bounty
   end
 
   def self.delete_all()
-    db = PG.connect({ dbname: 'space_cowboys', host: 'localhost'})
-    sql = "DELETE FROM bounties;"
-    db.prepare("delete_all", sql)
-    db.exec_prepared("delete_all")
-    db.close()
   end
 
-  def find_by_id()
-    db = PG.connect({ dbname: 'space_cowboys', host: 'localhost'})
-    sql = "SELECT * FROM bounties WHERE id = $1;"
-    values = [@id]
-    db.prepare("find_by_id", sql)
-    bounty = db.exec_prepared("find_by_id", values)
-    db.close()
-    return bounty.map{|bounty| Bounty.new(bounty)}
+  def self.find_by(column_name)
   end
+
+
 
 end
+
+# bounty.rb
