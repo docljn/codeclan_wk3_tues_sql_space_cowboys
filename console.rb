@@ -34,6 +34,8 @@ bounty1.update()
 bounty1.delete()
 # found = bounty1.find_by_id()
 
+found = Bounty.find_by('id', 2)
+
 binding.pry
 nil
 

@@ -1,5 +1,6 @@
 # bounty.rb
 require('pg')
+require('pry-byebug')
 
 class Bounty
   attr_reader :id
@@ -100,7 +101,19 @@ class Bounty
     db.close()
   end
 
-  def self.find_by(column_name)
+  def self.find_by(column_name, value)
+    db = PG.connect({dbname: 'space_cowboys', host: 'localhost'})
+    sql = "SELECT * FROM bounties WHERE #{column_name} = #{value} "
+    sql = "SELECT * FROM bounties WHERE $1 = $2"
+    values =
+    # values = [value.to_i]
+    db.prepare("find", sql)
+    bounties = db.exec_prepared("find")
+    object = bounties.map {|bounty| Bounty.new(bounty)}
+    binding.pry
+    return object
+
+
   end
 
 
